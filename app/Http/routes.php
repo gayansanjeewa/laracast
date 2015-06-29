@@ -25,3 +25,8 @@ Route::get('contact', 'PagesController@contact');
 //Route::get('articles/{id}/edit', 'ArticlesController@edit');
 
 Route::resource('articles', 'ArticlesController'); // this generates all of the above commented routes. run "php artisan route:list"
+
+Route::controllers([
+    'auth' => 'Auth\AuthController',
+    'password' => 'Auth\PasswordController',
+]);
