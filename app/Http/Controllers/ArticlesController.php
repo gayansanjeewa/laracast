@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Article;
 use App\Http\Requests\ArticleRequest;
+use App\User;
+use Auth;
 use Carbon\Carbon;
 //use Request;
 //use Illuminate\Http\Request;
@@ -21,6 +23,9 @@ class ArticlesController extends Controller
 //        $articles = Article::all(); // display all
 //        $articles = Article::latest('published_at')->where('published_at', '<=', Carbon::now())->get(); // only display published items
 //        or apply query scope
+
+//        return \Ath|User::find()->name; // get the authenticated user's name
+
         $articles = Article::latest('published_at')->published()->get(); // published() is a query scope set in the Article model
 //        $articles = Article::latest('published_at')->unpublished()->get(); // just to test -> unpublished() is a query scope set in the Article model
 
@@ -61,7 +66,13 @@ class ArticlesController extends Controller
 
 
 //        Article::create(Request::all()); // we remove this as ve are get5ting the validated date through $request -> therefor "use Request;" can be removed from above
-        Article::create($request->all());
+//        Article::create($request->all());
+
+        // save authenticated users is with the form data
+//        Auth::user()->articles->save(New Article($request->all()));
+//        if clean the above code a little bit,
+        $article = New Article($request->all());
+        Auth::user()->articles()->save($article);
 
         return redirect('articles');
     }
