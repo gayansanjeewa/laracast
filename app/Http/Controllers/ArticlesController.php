@@ -82,8 +82,14 @@ class ArticlesController extends Controller
         // save authenticated users is with the form data
 //        Auth::user()->articles->save(New Article($request->all()));
 //        if clean the above code a little bit,
-        $article = New Article($request->all());
-        Auth::user()->articles()->save($article);
+//        $article = New Article($request->all()); // Article::create([]) would also work
+//        Auth::user()->articles()->save($article);
+
+        // same as above 2 lines
+        Auth::user()->articles()->create($request->all());
+
+        //Setting flash messages
+        \Session::flash('flash_message', 'Your article has been created!'); // Session::put() is also available, but Session::flash is temporal
 
         return redirect('articles');
     }

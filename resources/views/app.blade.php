@@ -14,6 +14,15 @@
 </head>
 <body>
     <div class="container">
+        @if(Session::has('flash_message'))
+            <div class="alert alert-success">
+                <button type="button" class="close" data-dismiss="alert" area-hidding="true">&times;</button>
+                {{ Session::get('flash_message') }}
+            </div>
+        @endif
+
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         @yield('content')
     </div>
 </body>
