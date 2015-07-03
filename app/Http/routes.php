@@ -15,8 +15,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('about', 'PagesController@about');
 Route::get('contact', 'PagesController@contact');
+
+//Route::get('about', 'PagesController@about'); // without authentication
+Route::get('about', ['middleware'=>'auth', 'uses'=>'PagesController@about']); //With authentication
+
+// Middleware without a controller
+Route::get('test', ['middleware'=>'auth', function() {
+    return 'this page will only displayed once the user is logged in :)';
+}]);
+
 
 //Route::get('articles', 'ArticlesController@index');
 //Route::get('articles/create', 'ArticlesController@create');
@@ -30,3 +38,7 @@ Route::controllers([
     'auth' => 'Auth\AuthController',
     'password' => 'Auth\PasswordController',
 ]);
+
+Route::get('foo', ['middleware' => 'manager', function(){
+    return 'This page will only be visible to a Manager';
+}]);

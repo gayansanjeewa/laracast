@@ -41,4 +41,19 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function articles(){
         return $this->hasMany('App\Article');
     }
+
+    public function isATeamManger(){
+        return false;
+    }
+
+    /**
+     * A Example of a Mutator
+     *
+     * Enables to hash password implicitly
+     *
+     * @param $password
+     */
+//    public function setPasswordAttribute($password){
+//        $this->attributes['password'] = mcrypt($password); // So we can $user->password = 'foobar'; but actually it's gonna be hashed in the background
+//    }
 }

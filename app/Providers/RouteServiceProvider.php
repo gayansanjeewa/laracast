@@ -25,8 +25,20 @@ class RouteServiceProvider extends ServiceProvider
     public function boot(Router $router)
     {
         //
-
         parent::boot($router);
+
+        // Route model binding
+        $router->model('articles', 'App\Article');
+        // articles is a wild card which shows in artisan Route:list, i.e: articles/{articles}
+        // App\Article is the model
+
+        // Could use Route::model(); instead
+
+
+        // For situations where we want to use a WHERE clause
+//        $router->bind('articles', function($id) {
+//           return \App\Article::published()->findOrFail($id); // find published articles
+//        });
     }
 
     /**

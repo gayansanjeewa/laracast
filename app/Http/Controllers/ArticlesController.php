@@ -16,6 +16,12 @@ use Illuminate\Http\Request;
 
 class ArticlesController extends Controller
 {
+
+    public function __construct(){
+//        $this->middleware('auth', ['only' => 'create']); // Apply Only to create action
+        $this->middleware('auth', ['except' => 'index']); // Apply to all Except the index
+    }
+
     /**
      * @return \Illuminate\View\View
      */
@@ -34,11 +40,16 @@ class ArticlesController extends Controller
     }
 
     /**
-     * @param $id
+     * @param Article $article
      * @return \Illuminate\View\View
+     * @internal param $id
      */
-    public function show($id) {
-        $article = Article::findOrFail($id);
+//    public function show($id) { // $id no longer exists after route model binding
+    public function show(Article $article) { // Route model binding
+
+//        dd($id);// do this after route model binding and you no longer get an id, instead we get a Article object which relevant to the given id,
+
+//        $article = Article::findOrFail($id);
 
         return view('articles.show', compact('article'));
     }
@@ -77,24 +88,27 @@ class ArticlesController extends Controller
         return redirect('articles');
     }
 
+
     /**
-     * @param $id
+     * @param Article $article
      * @return \Illuminate\View\View
      */
-    public function edit($id) {
-        $article = Article::findOrFail($id);
+//    public function edit($id) {
+    public function edit(Article $article) {// Route model binding
+//        $article = Article::findOrFail($id);
 
         return view('articles.edit', compact('article'));
 
     }
 
     /**
-     * @param $id
+     * @param Article $article
      * @param ArticleRequest $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update($id, ArticleRequest $request) {
-        $article = Article::findOrFail($id);
+//    public function update($id, ArticleRequest $request) {
+    public function update(Article $article, ArticleRequest $request) {// Route model binding
+//        $article = Article::findOrFail($id);
 
         $article->update($request->all());
 

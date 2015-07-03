@@ -15,7 +15,7 @@ class Article extends Model
         'user_id'
     ];
 
-    protected $dates = ['published_at']; // Specifying published_at as a date, default it is a string
+    protected $dates = ['published_at']; // Specifying published_at as a date(a Carbon instant), default it is a string
 
     /**
      * @param $query
@@ -25,6 +25,8 @@ class Article extends Model
     }
 
     /**
+     * Query Scopes
+     *
      * display all the unpublished articles - good for an admin panel
      * @param $query
      */
@@ -33,6 +35,8 @@ class Article extends Model
     }
 
     /**
+     * Mutators
+     *
      * @param $date
      */
     public function setPublishedAtAttribute($date) {
