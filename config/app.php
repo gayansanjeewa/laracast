@@ -145,6 +145,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        // custom one pulled down through composer require laracasts\flash
+        Laracasts\Flash\FlashServiceProvider::class,
+
     ],
 
     /*
@@ -194,6 +197,9 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
         'Form'      => Illuminate\Html\FormFacade::class,
         'Html'      => Illuminate\Html\HtmlFacade::class,
+
+        // Custom facade
+        'Flash'     => Laracasts\Flash\Flash::class,
 
     ],
 

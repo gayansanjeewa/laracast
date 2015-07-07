@@ -88,10 +88,26 @@ class ArticlesController extends Controller
         // same as above 2 lines
         Auth::user()->articles()->create($request->all());
 
-        //Setting flash messages
-        \Session::flash('flash_message', 'Your article has been created!'); // Session::put() is also available, but Session::flash is temporal
+        // Setting flash messages
+        // Using the Session facade
+//        \Session::flash('flash_message', 'Your article has been created!'); // Session::put() is also available, but Session::flash is temporal
+        // Following is using session() helper function rater than doing to use Session and doing the above
+//        session()->flash('flash_message', 'Your article has been created!');
+//        session()->flash('flash_message_important', true);
+//        return redirect('articles');
 
-        return redirect('articles');
+//        above equivalent to the following method
+        return redirect('articles')->with([
+            'flash_message' => 'Your article has been created!',
+            'flash_message_important' => true
+        ]);
+
+        // can use instead on the above
+        // custom function trough laracasts Flash facade.
+//        flash('Your article has been created!'); // default information message
+////        ex:
+////        flash()->success('Your article has been created!');
+//        return redirect('articles');
     }
 
 
