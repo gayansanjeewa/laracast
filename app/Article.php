@@ -52,4 +52,13 @@ class Article extends Model
     public function user() {
         return $this->belongsTo('App\User');
     }
+
+    /**
+     * Get the tags associated with a given article
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function tags(){
+//        return $this->belongsToMany('App\Tags'); // this failed when we try to assign article ids, need to integrate timestamp too
+        return $this->belongsToMany('App\Tag')->withTimestamps();
+    }
 }
