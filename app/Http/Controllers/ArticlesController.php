@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Article;
 use App\Http\Requests\ArticleRequest;
+use App\Tag;
 use App\User;
 use Auth;
 use Carbon\Carbon;
@@ -58,7 +59,9 @@ class ArticlesController extends Controller
      * @return \Illuminate\View\View
      */
     public function create() {
-        return view('articles.create');
+//        $tags = Tag::lists('name'); // give a list of names
+        $tags = Tag::lists('name', 'id'); // key value pairs
+        return view('articles.create', compact('tags'));
     }
 
     /**
@@ -86,7 +89,7 @@ class ArticlesController extends Controller
 //        Auth::user()->articles()->save($article);
 
         // same as above 2 lines
-        Auth::user()->articles()->create($request->all());
+        $article = Auth::user()->articles()->create($request->all());
 
         // Setting flash messages
         // Using the Session facade
@@ -95,6 +98,11 @@ class ArticlesController extends Controller
 //        session()->flash('flash_message', 'Your article has been created!');
 //        session()->flash('flash_message_important', true);
 //        return redirect('articles');
+
+        // storing tags
+//        $tagIds = $request->input('tags');
+        $article->tags()->attach($request->input('tags'));
+
 
 //        above equivalent to the following method
         return redirect('articles')->with([
