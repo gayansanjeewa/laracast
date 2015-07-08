@@ -5,6 +5,7 @@
     <title>My App</title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css"/>
 
     <!-- Optional theme -->
     {{--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">--}}
@@ -31,8 +32,10 @@
         {{--include a partial from the laracasts flash facade--}}
         {{--@include('flash::message')--}}
 
-        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        {{--<script src="https://code.jquery.com/jquery-1.10.2.js"></script>--}}
+        <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+        {{--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>--}}
+        <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
         <script>
             $('div.alert').not('.alert-important').delay(3000).slideUp(300);
         </script>
