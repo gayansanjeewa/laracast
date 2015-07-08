@@ -73,7 +73,7 @@ class ArticlesController extends Controller
 //        $article = new Article();
 //        #article->title = $input['title'];
 //        or
-//        $article = new Article(['title'=>$input['title'], ]);
+//        $article = Article(['title'=>$input['title'], ]);
 //        Article::create(['title'=>$input['title'],);
 //        or
 //        $input['published_at'] = Carbon::now();
@@ -89,7 +89,8 @@ class ArticlesController extends Controller
 //        Auth::user()->articles()->save($article);
 
         // same as above 2 lines
-        $article = Auth::user()->articles()->create($request->all());
+//        $article = Auth::user()->articles()->create($request->all());
+
 
         // Setting flash messages
         // Using the Session facade
@@ -101,7 +102,14 @@ class ArticlesController extends Controller
 
         // storing tags
 //        $tagIds = $request->input('tags');
-        $article->tags()->attach($request->input('tags'));
+//        $article->tags()->attach($request->input('tag_list'));
+//        refactor above
+//        $this->syncTags($article, $request->input('tag_list'));
+
+//        equivalent to all above
+//        $article = Auth::user()->articles()->create($request->all());
+//        $this->syncTags($article, $request->input('tag_list'));
+        $this->createArticle($request);
 
 
 //        above equivalent to the following method
@@ -126,8 +134,8 @@ class ArticlesController extends Controller
 //    public function edit($id) {
     public function edit(Article $article) {// Route model binding
 //        $article = Article::findOrFail($id);
-
-        return view('articles.edit', compact('article'));
+        $tags = Tag::lists('name', 'id');
+        return view('articles.edit', compact('article', 'tags'));
 
     }
 
@@ -141,7 +149,35 @@ class ArticlesController extends Controller
 //        $article = Article::findOrFail($id);
 
         $article->update($request->all());
+//        $article->tags()->attach($request->input('tag_list'));
+//        $article->tags()->sync($request->input('tag_list')); // sync : if exists let it be, otherwise modify
+//        refactor above
+        $this->syncTags($article, $request->input('tag_list'));
 
         return redirect('articles');
+    }
+
+    /**
+     * Sync up the list of tags in the database
+     * @param Article $article
+     * @param array $tags
+     * @internal param ArticleRequest $request
+     */
+    public function syncTags(Article $article, array $tags)
+    {
+        $article->tags()->sync($tags);
+    }
+
+    /**
+     * Save the article
+     *
+     * @param ArticleRequest $request
+     * @return mixed
+     */
+    private function createArticle(ArticleRequest $request)
+    {
+        $article = Auth::user()->articles()->create($request->all());
+        $this->syncTags($article, $request->input('tag_list'));
+        return $article;
     }
 }

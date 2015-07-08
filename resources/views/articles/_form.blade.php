@@ -16,9 +16,15 @@
 </div>
 
 <div class="form-group">
-    {!! Form::label('tags', 'Tags:') !!}
-    {!! Form::select('tags[]', $tags, null, ['class'=>'form-control', 'multiple']) !!}
+    {!! Form::label('tag_list', 'Tags:') !!}
+    {{--{!! Form::select('tags[]', $tags, null, ['class'=>'form-control', 'multiple']) !!}--}}
+    {{-- After applying form model binding we could leave it as it is--}}
+    {{--{!! Form::select('tag_list[]', $tags, $article->tagList(), ['class'=>'form-control', 'multiple']) !!}--}}
+    {!! Form::select('tag_list[]', $tags, null, ['class'=>'form-control', 'multiple']) !!}
 </div>
+{{-- below both work--}}
+{{--{{ $article->tagList() }}--}}
+{{--{{ $article->tag_list }}--}}
 
 
 <div class="form-group">

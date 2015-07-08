@@ -61,4 +61,15 @@ class Article extends Model
 //        return $this->belongsToMany('App\Tags'); // this failed when we try to assign article ids, need to integrate timestamp too
         return $this->belongsToMany('App\Tag')->withTimestamps();
     }
+
+    /**Get a list of tag ids associated with articles
+     * @return array
+     */
+    public function getTagListAttribute(){
+        return $this->tags->lists('id');
+    }
+
+//    public function tagList(){
+//        return $this->tags->lists('id');
+//    }
 }
