@@ -4,8 +4,9 @@
     <h3>Witte a New Article</h3>
     <hr/>
 
-    {!! Form::open(['url' => 'articles']) !!}
-
+    {{--{!! Form::open(['url' => 'articles']) !!}--}}
+    {{-- Form model binding to binf an Article object to the model, so when creating an empty article object is available  --}}
+    {!! Form::model($article = new \App\Article, ['url' => 'articles']) !!}
     @include('articles._form', ['submitButtonText' => 'Add article'])
 
         {{--<div class="form-group">--}}

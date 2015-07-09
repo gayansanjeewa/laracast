@@ -12,7 +12,15 @@
 
 <div class="form-group">
     {!! Form::label('published_at', 'Published On:') !!}
-    {!! Form::input('date', 'published_at', date('Y-m-d'), ['class'=>'form-control']) !!}
+
+    {{--{!! Form::input('date', 'published_at', date('Y-m-d'), ['class'=>'form-control']) !!}--}
+    {{-- when if we go to update it always shows the current date, tring to fix it below --}}
+
+    {{--{!! Form::input('date', 'published_at', $article->published_at->format('Y-m-d'), ['class'=>'form-control']) !!}--}}
+    {{-- We format the date in the Arricle model useing an accessor so here we do not need to format it, it be formatted by default to Y-m-d --}}
+
+    {!! Form::input('date', 'published_at', $article->published_at, ['class'=>'form-control']) !!}
+
 </div>
 
 <div class="form-group">
@@ -34,7 +42,7 @@
 @section('footer')
     <script>
         $('#tag_list').select2({
-            placeholder: "Choose a tag",
+            placeholder: "Choose a tag"
 ////            this is fine in our case
 //            tags: true,
 //            ajax: {

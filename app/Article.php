@@ -44,6 +44,22 @@ class Article extends Model
         $this->attributes['published_at'] = Carbon::parse($date); // set to mid night
     }
 
+
+    /**
+     * This is a Accessor, Above one is a mutator
+     * @param $date
+     * @return Carbon
+     */
+    public function getPublishedAtAttribute($date) {
+//        return new Carbon($date);
+
+//        we could also format the published_at date by default as described below
+//        return (new Carbon($date))->format('Y-m-d');
+
+//        same as above using Carbon::parse() with the formatting
+        return Carbon::parse($date)->format("Y-m-d"); // then when we access published_at date it'll be always at this format
+    }
+
     /**
      * An article is owned by a user
      *
