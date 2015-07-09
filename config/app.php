@@ -148,6 +148,9 @@ return [
         // custom one pulled down through composer require laracasts\flash
         Laracasts\Flash\FlashServiceProvider::class,
 
+        // check out ViewComposerServiceProvider
+        App\Providers\ViewComposerServiceProvider::class,
+
     ],
 
     /*

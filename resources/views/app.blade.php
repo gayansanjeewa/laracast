@@ -6,7 +6,13 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css"/>
+    <style rel="stylesheet">
+        .starter-template {
+            padding: 40px 15px;
+            /*text-align: center;*/
+        }
 
+    </style>
     <!-- Optional theme -->
     {{--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">--}}
 
@@ -14,7 +20,10 @@
     {{--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>--}}
 </head>
 <body>
+    @include('partials.nav')
+
     <div class="container">
+        <div class="starter-template">
         {{--@if(Session::has('flash_message'))--}}
             {{--<div class="alert alert-success {{ Session::has('flash_message_important')? '.alert-important': '' }}">--}}
                 {{--@if(Session::has('flash_message_important'))--}}
@@ -40,6 +49,7 @@
             $('div.alert').not('.alert-important').delay(3000).slideUp(300);
         </script>
         @yield('content')
+        </div>
     </div>
 </body>
 </html>

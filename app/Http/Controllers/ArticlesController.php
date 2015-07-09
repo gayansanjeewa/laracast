@@ -36,8 +36,11 @@ class ArticlesController extends Controller
         $articles = Article::latest('published_at')->published()->get(); // published() is a query scope set in the Article model
 //        $articles = Article::latest('published_at')->unpublished()->get(); // just to test -> unpublished() is a query scope set in the Article model
 
+
+//        $latest = Article::latest()->first(); // created a view-composer to handle this, that is allow partials to always receive data
+
 //        return view('articles.index')->with('articles', $articles);
-        return view('articles.index', compact('articles'));
+        return view('articles.index', compact('articles', 'latest'));
     }
 
     /**
