@@ -28,17 +28,18 @@ class RouteServiceProvider extends ServiceProvider
         parent::boot($router);
 
         // Route model binding
-        $router->model('articles', 'App\Article');
+//        $router->model('articles', 'App\Article'); // binding the wild card or a route "article" to an instance of App\Article
         // articles is a wild card which shows in artisan Route:list, i.e: articles/{articles}
         // App\Article is the model
 
         // Could use Route::model(); instead
 
+//        Above is correct but let access to all the article ids, even the not yet published once
 
-        // For situations where we want to use a WHERE clause
-//        $router->bind('articles', function($id) {
-//           return \App\Article::published()->findOrFail($id); // find published articles
-//        });
+//        Custom binding to tackle that showing not yet published articles through the url
+        $router->bind('articles', function($id) {
+            return \App\Article::published()->findOrFail($id);
+        });
     }
 
     /**
