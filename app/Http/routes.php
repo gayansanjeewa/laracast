@@ -34,6 +34,8 @@ Route::get('test', ['middleware'=>'auth', function() {
 
 Route::resource('articles', 'ArticlesController'); // this generates all of the above commented routes. run "php artisan route:list"
 
+Route::get('tags/{tags}', 'TagsController@show'); // to make tags clickable and navigate to that tag related article
+
 Route::controllers([
     'auth' => 'Auth\AuthController',
     'password' => 'Auth\PasswordController',

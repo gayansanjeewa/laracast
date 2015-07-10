@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('content')
-    <h3>Witte a New Article</h3>
+    <h3>Write a New Article</h3>
     <hr/>
 
     {{--{!! Form::open(['url' => 'articles']) !!}--}}
