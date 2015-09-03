@@ -40,7 +40,8 @@ class Article extends Model
      * @param $date
      */
     public function setPublishedAtAttribute($date) {
-//        $this->attributes['published_at'] = Carbon::createFromFormat('Y-m-d', $date);
+//        $this->attributes['published_at'] = Carbon::createFromFormat('Y-m-d', $date); // set the current date time
+//        or
         $this->attributes['published_at'] = Carbon::parse($date); // set to mid night
     }
 
